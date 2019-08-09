@@ -86,11 +86,13 @@ void MasterControl::CreateScene()
     lightNode->SetPosition(Vector3(2.0f, 3.0f, 1.0f));
     lightNode->CreateComponent<Light>();
     //Camera
+    /*
     Node* cameraNode{ scene_->CreateChild("Camera") };
     cameraNode->SetPosition(Vector3::ONE * 5.0f);
     cameraNode->LookAt(Vector3::ZERO);
     Camera* camera{ cameraNode->CreateComponent<Camera>() };
     RENDERER->SetViewport(0, new Viewport(context_, scene_, camera));
+    */
     //Box!
 //    scene_->CreateChild()->CreateComponent<StaticModel>()->SetModel(CACHE->GetResource<Model>("Models/Box.mdl"));
     scene_->CreateChild()->CreateComponent<StaticModel>()->SetModel(CACHE->GetResource<Model>("Models/Cone.mdl"));

@@ -12,16 +12,25 @@
 #include <Urho3D/UI/UIEvents.h>
 
 #include <Urho3D/Core/CoreEvents.h>
+#include <Urho3D/Graphics/Renderer.h>
 
-
-MyCamera::MyCamera(Context* context) : Component(context)
+MyCamera::MyCamera(Context* context) : Camera(context)
 {
 }
 
 void MyCamera::OnNodeSet(Node *node)
 {
     scene_ = GetScene();
-    cameraNode_ = scene_->GetChild("Camera");
+
+//    Camera scene node.
+//    SharedPtr<Node> cameraNode_;
+//    cameraNode_ = scene_->GetChild("Camera");
+    cameraNode_ = node;
+    cameraNode_->SetPosition(Vector3::ONE * 5.0f);
+    cameraNode_->LookAt(Vector3::ZERO);
+    Camera* camera{ cameraNode_->CreateComponent<Camera>() };
+
+    GetSubsystem<Renderer>()->SetViewport(0, new Viewport(context_, scene_, camera));
 
     // Subscribe to global events for camera movement
     SubscribeToEvents();

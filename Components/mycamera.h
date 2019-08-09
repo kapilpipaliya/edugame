@@ -3,6 +3,9 @@
 #define MOUSEMOVE_H
 
 #include <Urho3D/Urho3D.h>
+
+#include <Urho3D/Graphics/Camera.h>
+
 #include <Urho3D/Container/Vector.h>
 #include <Urho3D/Scene/LogicComponent.h>
 #include <Urho3D/Scene/Component.h>
@@ -12,9 +15,10 @@
 #include <Urho3D/UI/Sprite.h>
 #include <Urho3D/Input/Input.h>
 
+
 using namespace Urho3D;
 
-class MyCamera : public Component
+class MyCamera : public Camera
 {
     URHO3D_OBJECT(MyCamera, Component)
 public:
@@ -24,7 +28,7 @@ public:
     /// Scene.
     SharedPtr<Scene> scene_;
     /// Camera scene node.
-    SharedPtr<Node> cameraNode_;
+    Node* cameraNode_;
     /// Camera yaw angle.
     float yaw_;
     /// Camera pitch angle.
