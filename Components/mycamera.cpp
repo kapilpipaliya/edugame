@@ -22,15 +22,10 @@ void MyCamera::OnNodeSet(Node *node)
 {
     scene_ = GetScene();
 
-//    Camera scene node.
-//    SharedPtr<Node> cameraNode_;
-//    cameraNode_ = scene_->GetChild("Camera");
-
     node->SetPosition(Vector3::ONE * 5.0f);
     node->LookAt(Vector3::ZERO);
-    Camera* camera{ node->CreateComponent<Camera>() };
 
-    GetSubsystem<Renderer>()->SetViewport(0, new Viewport(context_, scene_, camera));
+    GetSubsystem<Renderer>()->SetViewport(0, new Viewport(context_, scene_, this));
 
     // Subscribe to global events for camera movement
     SubscribeToEvents();
