@@ -27,8 +27,7 @@ public:
 
     /// Scene.
     SharedPtr<Scene> scene_;
-    /// Camera scene node.
-    Node* cameraNode_;
+
     /// Camera yaw angle.
     float yaw_;
     /// Camera pitch angle.

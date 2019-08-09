@@ -25,10 +25,10 @@ void MyCamera::OnNodeSet(Node *node)
 //    Camera scene node.
 //    SharedPtr<Node> cameraNode_;
 //    cameraNode_ = scene_->GetChild("Camera");
-    cameraNode_ = node;
-    cameraNode_->SetPosition(Vector3::ONE * 5.0f);
-    cameraNode_->LookAt(Vector3::ZERO);
-    Camera* camera{ cameraNode_->CreateComponent<Camera>() };
+
+    node->SetPosition(Vector3::ONE * 5.0f);
+    node->LookAt(Vector3::ZERO);
+    Camera* camera{ node->CreateComponent<Camera>() };
 
     GetSubsystem<Renderer>()->SetViewport(0, new Viewport(context_, scene_, camera));
 
@@ -68,18 +68,18 @@ void MyCamera::MoveCamera(float timeStep)
         pitch_ = Clamp(pitch_, -90.0f, 90.0f);
 
         // Construct new orientation for the camera scene node from yaw and pitch. Roll is fixed to zero
-        cameraNode_->SetRotation(Quaternion(pitch_, yaw_, 0.0f));
+        node_->SetRotation(Quaternion(pitch_, yaw_, 0.0f));
     }
 
     // Read WASD keys and move the camera scene node to the corresponding direction if they are pressed
     if (input->GetKeyDown(KEY_W))
-        cameraNode_->Translate(Vector3::FORWARD * MOVE_SPEED * timeStep);
+        node_->Translate(Vector3::FORWARD * MOVE_SPEED * timeStep);
     if (input->GetKeyDown(KEY_S))
-        cameraNode_->Translate(Vector3::BACK * MOVE_SPEED * timeStep);
+        node_->Translate(Vector3::BACK * MOVE_SPEED * timeStep);
     if (input->GetKeyDown(KEY_A))
-        cameraNode_->Translate(Vector3::LEFT * MOVE_SPEED * timeStep);
+        node_->Translate(Vector3::LEFT * MOVE_SPEED * timeStep);
     if (input->GetKeyDown(KEY_D))
-        cameraNode_->Translate(Vector3::RIGHT * MOVE_SPEED * timeStep);
+        node_->Translate(Vector3::RIGHT * MOVE_SPEED * timeStep);
 }
 
 void MyCamera::HandleUpdate(StringHash eventType, VariantMap &eventData)
